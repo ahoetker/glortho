@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  db:
+    image: 'postgres:latest'
+    ports:
+      - 15432:5432
+    env_file:
+      - .dockerenv
+
+  app:
+    image: 'jwt_authentication_python_postgres:dev'
+    build: .
+    ports:
+      - 8082:8080
+    env_file:
+      - .dockerenv
+    depends_on:
+      - db

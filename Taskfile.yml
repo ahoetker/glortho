@@ -1,0 +1,47 @@
+version: '3'
+
+env:
+  IMAGE: jwt_authentication_python_postgres
+  TAG: latest
+
+tasks:
+
+  run:
+    desc: Run the application using Poetry.
+    env:
+      PORT: 8080
+    cmds:
+      - poetry run uvicorn jwt_authentication_python_postgres.api.server:app --port $PORT
+    
+  alembic_upgrade:
+    desc: Upgrade the PostgresQL database to the latest revision.
+    cmds:
+      - poetry run alembic upgrade head
+      
+  build:  
+    cmds:
+      - docker-compose build
+
+  start_db:
+    desc: Start the PostgresQL database
+    cmds:
+      - docker-compose up -d db
+
+  stop_db:
+    desc: Stop the PostgresQL database
+    cmds:
+      - docker-compose stop db
+    
+  up:
+    desc: Start the dockerized app
+    deps:
+      - build
+    env:
+      PORT: 8080
+    cmds:
+      - docker-compose up app
+
+  down:
+    desc: Stop all the docker-compose processes
+    cmds:
+      - docker-compose down
