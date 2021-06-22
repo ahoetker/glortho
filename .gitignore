@@ -1,6 +1,7 @@
 .vscode
 # Environment file
 .env
+.dockerenv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
