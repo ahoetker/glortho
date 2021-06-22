@@ -1,11 +1,15 @@
 from datetime import datetime, timedelta
+from fastapi import Depends
 from jose import jwt
 from typing import Optional
 
-from jwt_authentication_python_postgres.core.config import get_settings
+from jwt_authentication_python_postgres.api.dependencies.settings import get_settings
 
 
-def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
+def create_access_token(
+    data: dict,
+    expires_delta: Optional[timedelta] = None,
+):
     settings = get_settings()
     to_encode = data.copy()
     if expires_delta:

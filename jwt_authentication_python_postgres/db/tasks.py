@@ -1,7 +1,9 @@
-from fastapi import FastAPI
-from databases import Database
-from jwt_authentication_python_postgres.core.config import get_settings
 import logging
+from fastapi import FastAPI, Depends
+from databases import Database
+
+from jwt_authentication_python_postgres.api.dependencies.settings import get_settings
+
 
 logger = logging.getLogger(__name__)
 

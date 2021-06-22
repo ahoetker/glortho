@@ -3,7 +3,8 @@ from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 
 from jwt_authentication_python_postgres.api.dependencies.database import get_repository
-from jwt_authentication_python_postgres.core.config import get_settings
+from jwt_authentication_python_postgres.api.dependencies.settings import get_settings
+from jwt_authentication_python_postgres.core.config import Settings
 from jwt_authentication_python_postgres.db.repositories.users import UsersRepository
 from jwt_authentication_python_postgres.models.token import TokenData
 from jwt_authentication_python_postgres.models.user import User
@@ -15,8 +16,8 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 async def get_current_user(
     token: str = Depends(oauth2_scheme),
     users_repo: UsersRepository = Depends(get_repository(UsersRepository)),
+    settings: Settings = Depends(get_settings),
 ):
-    settings = get_settings()
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",

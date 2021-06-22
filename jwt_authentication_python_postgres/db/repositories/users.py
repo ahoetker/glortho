@@ -21,6 +21,7 @@ READ_USERS_QUERY = """
     SELECT id, username, email, full_name, disabled FROM users;
 """
 
+
 class UsersRepository(BaseRepository):
     """ "
     All database actions associated with the User resource

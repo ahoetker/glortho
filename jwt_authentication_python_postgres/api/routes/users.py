@@ -4,11 +4,12 @@ from fastapi import APIRouter, Body, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
 from jwt_authentication_python_postgres.api.dependencies.database import get_repository
+from jwt_authentication_python_postgres.api.dependencies.settings import get_settings
 from jwt_authentication_python_postgres.api.dependencies.user import (
     get_current_active_user,
 )
+from jwt_authentication_python_postgres.core.config import Settings
 from jwt_authentication_python_postgres.db.repositories.users import UsersRepository
-from jwt_authentication_python_postgres.core.config import get_settings, Settings
 from jwt_authentication_python_postgres.models.token import Token
 from jwt_authentication_python_postgres.models.user import User, UserPublic
 from jwt_authentication_python_postgres.util.authentication import authenticate_user
