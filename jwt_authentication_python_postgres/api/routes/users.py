@@ -1,6 +1,6 @@
 from datetime import timedelta
 from typing import List
-from fastapi import APIRouter, Body, Depends, HTTPException
+from fastapi import APIRouter, Body, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
 from jwt_authentication_python_postgres.api.dependencies.database import get_repository
