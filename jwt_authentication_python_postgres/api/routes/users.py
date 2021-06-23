@@ -1,3 +1,4 @@
+from asyncpg.exceptions import UniqueViolationError
 from datetime import timedelta
 from typing import List
 from fastapi import APIRouter, Body, Depends, HTTPException, status
@@ -11,8 +12,16 @@ from jwt_authentication_python_postgres.api.dependencies.user import (
 from jwt_authentication_python_postgres.core.config import Settings
 from jwt_authentication_python_postgres.db.repositories.users import UsersRepository
 from jwt_authentication_python_postgres.models.token import Token
-from jwt_authentication_python_postgres.models.user import User, UserPublic
-from jwt_authentication_python_postgres.util.authentication import authenticate_user
+from jwt_authentication_python_postgres.models.user import (
+    User,
+    UserPublic,
+    UserCreate,
+    UserCreateHashedPassword,
+)
+from jwt_authentication_python_postgres.util.authentication import (
+    authenticate_user,
+    get_password_hash,
+)
 from jwt_authentication_python_postgres.util.token import create_access_token
 
 router = APIRouter()
@@ -38,6 +47,22 @@ async def login_for_access_token(
         data={"sub": user.username}, expires_delta=access_token_expires
     )
     return {"access_token": access_token, "token_type": "bearer"}
+
+
+@router.post("/users", response_model=UserPublic)
+async def create_user(
+    new_user: UserCreate = Body(...),
+    users_repo: UsersRepository = Depends(get_repository(UsersRepository)),
+):
+    hashed_password = get_password_hash(new_user.password)
+    new_user_hashed_password = UserCreateHashedPassword(
+        hashed_password=hashed_password, **new_user.dict()
+    )
+    try:
+        user = await users_repo.create_user(new_user=new_user_hashed_password)
+        return user.dict()
+    except UniqueViolationError as e:
+        raise HTTPException(status_code=409, detail=str(e.detail))
 
 
 @router.get("/users/me/", response_model=UserPublic)

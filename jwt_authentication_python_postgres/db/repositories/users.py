@@ -1,10 +1,12 @@
+from typing import List
+
 from jwt_authentication_python_postgres.db.repositories.base import BaseRepository
 from jwt_authentication_python_postgres.models.user import (
     UserCreate,
+    UserCreateHashedPassword,
     UserUpdate,
     UserInDB,
 )
-from typing import List
 
 CREATE_USER_QUERY = """
     INSERT INTO users (username, email, full_name, disabled, hashed_password)
@@ -27,8 +29,8 @@ class UsersRepository(BaseRepository):
     All database actions associated with the User resource
     """
 
-    async def create_user(self, *, new_user: UserCreate) -> UserInDB:
-        query_values = new_user.dict()
+    async def create_user(self, *, new_user: UserCreateHashedPassword) -> UserInDB:
+        query_values = new_user.dict(exclude={"password"})
         user = await self.db.fetch_one(query=CREATE_USER_QUERY, values=query_values)
         return UserInDB(**user)
 
