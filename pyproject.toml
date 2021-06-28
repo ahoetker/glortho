@@ -25,6 +25,9 @@ email-validator = "^1.1.3"
 pytest = "^6.2.4"
 black = "^21.6b0"
 devtools = "^0.6.1"
+pytest-cov = "^2.12.1"
+pytest-asyncio = "^0.15.1"
+httpx = "^0.18.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

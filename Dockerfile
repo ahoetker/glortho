@@ -25,6 +25,12 @@ RUN poetry export -f requirements.txt | /venv/bin/pip install -r /dev/stdin
 COPY . .
 RUN poetry build && /venv/bin/pip install dist/*.whl
 
+FROM builder as development
+
+RUN poetry export -f requirements.txt --dev | /venv/bin/pip install -r /dev/stdin
+COPY alembic.ini scripts/run_tests.sh ./
+ENTRYPOINT ["./run_tests.sh"]
+
 FROM base as final
 
 RUN apt-get update && \
@@ -35,6 +41,6 @@ RUN apt-get update && \
 COPY --from=builder /venv /venv
 COPY alembic.ini /app
 COPY jwt_authentication_python_postgres /app/jwt_authentication_python_postgres
-COPY scripts/docker-entrypoint.sh scripts/asgi.py config.py ./
+COPY scripts/docker-entrypoint.sh scripts/asgi.py scripts/run_tests.sh config.py ./
 RUN chmod +x docker-entrypoint.sh
 ENTRYPOINT ["./docker-entrypoint.sh"]

@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+  db:
+    image: 'postgres:latest'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: test_db
+
+  sut:
+    image: 'jwt_authentication_python_postgres:test'
+    build:
+      context: .
+      target: development
+    entrypoint: 
+      - /bin/bash
+    command: run_tests.sh
+    environment:
+      ACCESS_TOKEN_EXPIRE_MINUTES: 3000
+      ALGORITHM: HS256
+      SECRET_KEY: just_for_tests
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_SERVER: db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: test_db
+    depends_on:
+      - db
