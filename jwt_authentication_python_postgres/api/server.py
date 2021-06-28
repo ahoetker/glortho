@@ -1,7 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from jwt_authentication_python_postgres.core import config, tasks
+from jwt_authentication_python_postgres.api.dependencies.settings import (
+    get_settings,
+)  # pytest
 from jwt_authentication_python_postgres.api.routes import router as api_router
+from jwt_authentication_python_postgres.core import tasks
 
 
 def get_application():
