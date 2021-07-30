@@ -3,12 +3,14 @@ from fastapi import FastAPI
 from jwt_authentication_python_postgres.db.tasks import (
     connect_to_db,
     close_db_connection,
+    create_first_admin_user,
 )
 
 
 def create_start_app_handler(app: FastAPI) -> Callable:
     async def start_app() -> None:
         await connect_to_db(app)
+        await create_first_admin_user(app)
 
     return start_app
 
