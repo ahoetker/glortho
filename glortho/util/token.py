@@ -3,7 +3,7 @@ from fastapi import Depends
 from jose import jwt
 from typing import Optional
 
-from jwt_authentication_python_postgres.api.dependencies.settings import get_settings
+from glortho.api.dependencies.settings import get_settings
 
 
 def create_access_token(

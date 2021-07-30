@@ -3,7 +3,7 @@ from databases import Database
 from fastapi import Depends
 from starlette.requests import Request
 
-from jwt_authentication_python_postgres.db.repositories.base import BaseRepository
+from glortho.db.repositories.base import BaseRepository
 
 
 def get_database(request: Request) -> Database:

@@ -3,13 +3,13 @@ import logging
 from fastapi import FastAPI
 from databases import Database
 
-from jwt_authentication_python_postgres.api.dependencies.settings import get_settings
-from jwt_authentication_python_postgres.api.dependencies.user import UsersRepository
-from jwt_authentication_python_postgres.models.user import (
+from glortho.api.dependencies.settings import get_settings
+from glortho.api.dependencies.user import UsersRepository
+from glortho.models.user import (
     UserCreateHashedPassword,
     UserPublic,
 )
-from jwt_authentication_python_postgres.util.authentication import get_password_hash
+from glortho.util.authentication import get_password_hash
 
 
 logger = logging.getLogger(__name__)

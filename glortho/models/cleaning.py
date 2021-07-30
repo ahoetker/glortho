@@ -1,7 +1,7 @@
 from typing import Optional
 from enum import Enum
 
-from jwt_authentication_python_postgres.models.core import IDModelMixin, CoreModel
+from glortho.models.core import IDModelMixin, CoreModel
 
 
 class CleaningType(str, Enum):

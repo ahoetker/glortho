@@ -1,6 +1,6 @@
 from typing import Callable
 from fastapi import FastAPI
-from jwt_authentication_python_postgres.db.tasks import (
+from glortho.db.tasks import (
     connect_to_db,
     close_db_connection,
     create_first_admin_user,

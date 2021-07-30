@@ -4,25 +4,25 @@ from typing import List
 from fastapi import APIRouter, Body, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
-from jwt_authentication_python_postgres.api.dependencies.database import get_repository
-from jwt_authentication_python_postgres.api.dependencies.settings import get_settings
-from jwt_authentication_python_postgres.api.dependencies.user import (
+from glortho.api.dependencies.database import get_repository
+from glortho.api.dependencies.settings import get_settings
+from glortho.api.dependencies.user import (
     get_current_active_user,
 )
-from jwt_authentication_python_postgres.core.config import Settings
-from jwt_authentication_python_postgres.db.repositories.users import UsersRepository
-from jwt_authentication_python_postgres.models.token import Token
-from jwt_authentication_python_postgres.models.user import (
+from glortho.core.config import Settings
+from glortho.db.repositories.users import UsersRepository
+from glortho.models.token import Token
+from glortho.models.user import (
     User,
     UserPublic,
     UserCreate,
     UserCreateHashedPassword,
 )
-from jwt_authentication_python_postgres.util.authentication import (
+from glortho.util.authentication import (
     authenticate_user,
     get_password_hash,
 )
-from jwt_authentication_python_postgres.util.token import create_access_token
+from glortho.util.token import create_access_token
 
 router = APIRouter()
 

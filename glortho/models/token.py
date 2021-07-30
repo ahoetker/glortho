@@ -1,4 +1,4 @@
-from jwt_authentication_python_postgres.models.core import IDModelMixin, CoreModel
+from glortho.models.core import IDModelMixin, CoreModel
 from typing import Optional
 
 

@@ -1,5 +1,5 @@
-from jwt_authentication_python_postgres.db.repositories.base import BaseRepository
-from jwt_authentication_python_postgres.models.cleaning import (
+from glortho.db.repositories.base import BaseRepository
+from glortho.models.cleaning import (
     CleaningCreate,
     CleaningUpdate,
     CleaningInDB,

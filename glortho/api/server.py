@@ -1,14 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from jwt_authentication_python_postgres.api.dependencies.settings import (
+from glortho.api.dependencies.settings import (
     get_settings,
 )  # pytest
-from jwt_authentication_python_postgres.api.routes import router as api_router
-from jwt_authentication_python_postgres.core import tasks
+from glortho.api.routes import router as api_router
+from glortho.core import tasks
 
 
 def get_application():
-    app = FastAPI(title="Postgres Thing", version="0.1.0")
+    app = FastAPI(title="Glortho Authentication Server", version="0.2.0")
     app.add_middleware(
         CORSMiddleware,
         allow_origins=["*"],

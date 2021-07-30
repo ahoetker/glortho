@@ -5,9 +5,9 @@ from httpx import AsyncClient
 from databases import Database
 from fastapi import FastAPI
 
-from jwt_authentication_python_postgres.api import server
-from jwt_authentication_python_postgres.api.dependencies.database import get_database
-from jwt_authentication_python_postgres.core.config import Settings
+from glortho.api import server
+from glortho.api.dependencies.database import get_database
+from glortho.core.config import Settings
 
 logger = logging.getLogger(__name__)
 

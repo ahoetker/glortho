@@ -9,7 +9,7 @@ import logging
 # we're appending the app directory to our path here so that we can import config easily
 sys.path.append(str(pathlib.Path(__file__).resolve().parents[3]))
 
-from jwt_authentication_python_postgres.api.dependencies.settings import (
+from glortho.api.dependencies.settings import (
     get_settings,
 )  # noqa
 
