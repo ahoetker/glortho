@@ -5,6 +5,10 @@ from pydantic import BaseSettings
 class Settings(BaseSettings):
     access_token_expire_minutes: int
     algorithm: str
+    first_admin_email: str = None
+    first_admin_fullname: str = "admin"
+    first_admin_username: str = "admin"
+    first_admin_password: str
     secret_key: str
     postgres_user: str
     postgres_password: str
@@ -21,3 +25,4 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
+        secrets_dir = "/run/secrets"

@@ -12,11 +12,14 @@ class UserBase(CoreModel):
 
     @validator("email")
     def email_valid(cls, v):
-        try:
-            valid = validate_email(v)
-            return valid.email
-        except EmailNotValidError as e:
-            raise ValueError(e)
+        if v is None:
+            return None
+        else:
+            try:
+                valid = validate_email(v)
+                return valid.email
+            except EmailNotValidError as e:
+                raise ValueError(e)
 
 
 class UserCreate(UserBase):
