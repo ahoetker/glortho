@@ -32,6 +32,10 @@ COPY alembic.ini scripts/run_tests.sh ./
 ENTRYPOINT ["./run_tests.sh"]
 
 FROM base as final
+LABEL org.opencontainers.image.authors andrew@hoetker.engineer
+LABEL org.opencontainers.image.url https://github.com/users/ahoetker/packages/container/package/glortho
+LABEL org.opencontainers.image.source https://github.com/ahoetker/glortho
+
 
 RUN apt-get update && \
     apt-get clean && \
