@@ -1,11 +1,11 @@
 from passlib.context import CryptContext
-from jwt_authentication_python_postgres.models.user import UserInDB
+from glortho.models.user import UserInDB
 from fastapi import Depends
 
-from jwt_authentication_python_postgres.db.repositories.users import (
+from glortho.db.repositories.users import (
     UsersRepository,
 )
-from jwt_authentication_python_postgres.api.dependencies.database import get_repository
+from glortho.api.dependencies.database import get_repository
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 

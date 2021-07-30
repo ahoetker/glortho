@@ -1,6 +1,6 @@
 from functools import lru_cache
 
-from jwt_authentication_python_postgres.core.config import Settings
+from glortho.core.config import Settings
 
 
 @lru_cache()

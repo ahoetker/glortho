@@ -1,7 +1,7 @@
 version: '3'
 
 env:
-  IMAGE: jwt_authentication_python_postgres
+  IMAGE: glortho
   TAG: latest
 
 tasks:
@@ -11,7 +11,7 @@ tasks:
     env:
       PORT: 8080
     cmds:
-      - poetry run uvicorn jwt_authentication_python_postgres.api.server:app --port $PORT
+      - poetry run uvicorn glortho.api.server:app --port $PORT
     
   alembic_upgrade:
     desc: Upgrade the PostgresQL database to the latest revision.

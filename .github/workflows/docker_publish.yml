@@ -15,7 +15,7 @@ on:
 
 env:
   # TODO: Change variable to your image's name.
-  IMAGE_NAME: jwt-authentication-python-postgres
+  IMAGE_NAME: glortho
 
 jobs:
   # Run tests.

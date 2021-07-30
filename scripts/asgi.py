@@ -1,1 +1,1 @@
-from jwt_authentication_python_postgres.api.server import app
+from glortho.api.server import app

@@ -2,14 +2,14 @@ from typing import List
 from fastapi import APIRouter, Body, Depends, HTTPException
 from starlette.status import HTTP_201_CREATED
 
-from jwt_authentication_python_postgres.models.cleaning import (
+from glortho.models.cleaning import (
     CleaningCreate,
     CleaningPublic,
 )
-from jwt_authentication_python_postgres.db.repositories.cleanings import (
+from glortho.db.repositories.cleanings import (
     CleaningsRepository,
 )
-from jwt_authentication_python_postgres.api.dependencies.database import get_repository
+from glortho.api.dependencies.database import get_repository
 
 router = APIRouter()
 

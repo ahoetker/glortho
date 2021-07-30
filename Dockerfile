@@ -40,7 +40,7 @@ RUN apt-get update && \
 
 COPY --from=builder /venv /venv
 COPY alembic.ini /app
-COPY jwt_authentication_python_postgres /app/jwt_authentication_python_postgres
+COPY glortho /app/glortho
 COPY scripts/docker-entrypoint.sh scripts/asgi.py scripts/run_tests.sh config.py ./
 RUN chmod +x docker-entrypoint.sh
 ENTRYPOINT ["./docker-entrypoint.sh"]

@@ -1,7 +1,7 @@
 from typing import List
 
-from jwt_authentication_python_postgres.db.repositories.base import BaseRepository
-from jwt_authentication_python_postgres.models.user import (
+from glortho.db.repositories.base import BaseRepository
+from glortho.models.user import (
     UserCreate,
     UserCreateHashedPassword,
     UserUpdate,
