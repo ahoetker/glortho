@@ -19,6 +19,10 @@ services:
     environment:
       ACCESS_TOKEN_EXPIRE_MINUTES: 3000
       ALGORITHM: HS256
+      FIRST_ADMIN_USERNAME: admin
+      FIRST_ADMIN_FULLNAME: Administrator
+      FIRST_ADMIN_PASSWORD: password
+      FIRST_ADMIN_EMAIL: admin@example.com
       SECRET_KEY: just_for_tests
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
