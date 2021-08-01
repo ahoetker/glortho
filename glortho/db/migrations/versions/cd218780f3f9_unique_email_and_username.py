@@ -18,31 +18,33 @@ depends_on = None
 
 
 def create_length_constraint():
-    op.create_check_constraint(
-        "ck_username_min_len",
-        "users",
-        func.char_length(column("username")) >= 3,
-    )
-    op.create_check_constraint(
-        "ck_username_max_len",
-        "users",
-        func.char_length(column("username")) <= 30,
-    )
+    with op.batch_alter_table("users", schema=None) as batch_op:
+        batch_op.create_check_constraint(
+            "ck_username_min_len",
+            func.char_length(column("username")) >= 3,
+        )
+        batch_op.create_check_constraint(
+            "ck_username_max_len",
+            func.char_length(column("username")) <= 30,
+        )
 
 
 def create_unique_constraints():
-    op.create_unique_constraint("uq_user_name", "users", ["username"])
-    op.create_unique_constraint("uq_email", "users", ["email"])
+    with op.batch_alter_table("users", schema=None) as batch_op:
+        batch_op.create_unique_constraint("uq_user_name", ["username"])
+        batch_op.create_unique_constraint("uq_email", ["email"])
 
 
 def drop_length_constraint():
-    op.drop_constraint("ck_username_min_len", "users")
-    op.drop_constraint("ck_username_max_len", "users")
+    with op.batch_alter_table("users", schema=None) as batch_op:
+        batch_op.drop_constraint("ck_username_min_len")
+        batch_op.drop_constraint("ck_username_max_len")
 
 
 def drop_unique_constraints():
-    op.drop_constraint("uq_user_name", "users")
-    op.drop_constraint("uq_email", "users")
+    with op.batch_alter_table("users", schema=None) as batch_op:
+        batch_op.drop_constraint("uq_user_name")
+        batch_op.drop_constraint("uq_email")
 
 
 def upgrade() -> None:

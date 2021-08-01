@@ -10,7 +10,11 @@ FROM base as builder
 
 RUN apt-get update && \
     apt-get clean && \
-    apt-get install -y libpq-dev build-essential && \
+    apt-get install -y \
+    build-essential \
+    libpq-dev \
+    sqlite3 \
+    && \
     rm -rf /var/lib/apt/lists/*
 
 ENV PIP_DEFAULT_TIMEOUT=100 \
@@ -39,7 +43,10 @@ LABEL org.opencontainers.image.source https://github.com/ahoetker/glortho
 
 RUN apt-get update && \
     apt-get clean && \
-    apt-get install -y libpq-dev && \
+    apt-get install -y \
+    libpq-dev \
+    sqlite3 \
+    && \
     rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /venv /venv

@@ -8,7 +8,7 @@ from glortho.core import tasks
 
 
 def get_application():
-    app = FastAPI(title="Glortho Authentication Server", version="0.3.0")
+    app = FastAPI(title="Glortho Authentication Server", version="0.4.0")
     app.add_middleware(
         CORSMiddleware,
         allow_origins=["*"],

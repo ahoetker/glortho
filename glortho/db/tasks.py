@@ -1,4 +1,5 @@
 from asyncpg.exceptions import UniqueViolationError
+from sqlite3 import IntegrityError
 import logging
 from fastapi import FastAPI
 from databases import Database
@@ -17,9 +18,14 @@ logger = logging.getLogger(__name__)
 
 async def connect_to_db(app: FastAPI) -> None:
     settings = get_settings()
-    database = Database(
-        settings.postgres_url, min_size=2, max_size=10
-    )  # these can be configured in config as well
+
+    if settings.database_url.scheme == "postgresql":
+        database = Database(
+            settings.database_url, min_size=2, max_size=10,
+        )
+    else:
+        database = Database(settings.database_url)
+
     try:
         await database.connect()
         app.state._db = database
@@ -56,3 +62,8 @@ async def create_first_admin_user(app: FastAPI) -> None:
         logger.info(
             f"Using existing initial admin user: {settings.first_admin_username}"
         )
+    except IntegrityError:
+        logger.info(
+            f"Using existing initial admin user: {settings.first_admin_username}"
+        )
+
