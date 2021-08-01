@@ -14,7 +14,7 @@ from glortho.api.dependencies.settings import (
 )  # noqa
 
 settings = get_settings()
-DATABASE_URL = settings.postgres_url
+DATABASE_URL = settings.database_url
 
 # Alembic Config object, which provides access to values within the .ini file
 config = alembic.context.config
@@ -39,7 +39,10 @@ def run_migrations_online() -> None:
         )
 
     with connectable.connect() as connection:
-        alembic.context.configure(connection=connection, target_metadata=None)
+        if DATABASE_URL.scheme == "sqlite":
+            alembic.context.configure(connection=connection, target_metadata=None, render_as_batch=True)
+        else:
+            alembic.context.configure(connection=connection, target_metadata=None)
         with alembic.context.begin_transaction():
             alembic.context.run_migrations()
 
