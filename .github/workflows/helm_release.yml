@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - feature/chart-releaser-workflow
 
 jobs:
   release:
