@@ -8,3 +8,9 @@ data:
   first_admin_username: {{ .Values.first_admin_username }}
   first_admin_fullname: {{ .Values.first_admin_fullname }}
   first_admin_email: {{ .Values.first_admin_email }}
+  {{ if .Values.postgres.enabled }}
+  postgres_db: {{ .Values.global.postgresql.postgresqlDatabase }}
+  postgres_user: {{ .Values.global.postgresql.postgresqlUsername }}
+  postgres_port: {{ quote .Values.global.postgresql.postgresqlServicePort }}
+  postgres_host: {{ .Release.Name }}-postgresql
+  {{ end }}

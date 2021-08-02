@@ -73,6 +73,33 @@ spec:
                 configMapKeyRef:
                   name: {{ .Release.Name }}-configmap
                   key: first_admin_email
+            {{ if .Values.postgres.enabled }}
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-configmap
+                  key: postgres_db
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-configmap
+                  key: postgres_user
+            - name: POSTGRES_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-configmap
+                  key: postgres_port
+            - name: POSTGRES_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-configmap
+                  key: postgres_host
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-postgresql
+                  key: postgresql-password
+            {{ end }}
           volumeMounts:
             - name: secret-key
               mountPath: "/var/secrets/secret_key"

@@ -4,6 +4,14 @@
 
 replicaCount: 1
 
+# global values - shared between postgresql and glortho
+global:
+  postgresql:
+    postgresqlDatabase: glortho
+    postgresqlUsername: postgres
+    postgresqlPassword:
+    postgresqlServicePort: 5432
+
 # Preconfigured secrets
 secrets:
   secret_key:
@@ -15,6 +23,10 @@ algorithm: HS256
 first_admin_username: admin
 first_admin_fullname: Administrator
 first_admin_email: admin@example.com
+
+# Whether to deploy Postgres as a dependent chart
+postgres:
+  enabled: true
 
 image:
   repository: ghcr.io/ahoetker/glortho
