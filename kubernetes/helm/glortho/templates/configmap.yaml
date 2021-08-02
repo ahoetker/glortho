@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  access_token_expire_minutes: {{ quote .Values.access_token_expire_minutes }}
+  algorithm: {{ .Values.algorithm }}
+  first_admin_username: {{ .Values.first_admin_username }}
+  first_admin_fullname: {{ .Values.first_admin_fullname }}
+  first_admin_email: {{ .Values.first_admin_email }}
