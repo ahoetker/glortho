@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  access_token_expire_minutes: {{ quote .Values.access_token_expire_minutes }}
+  algorithm: {{ .Values.algorithm }}
+  first_admin_username: {{ .Values.first_admin_username }}
+  first_admin_fullname: {{ .Values.first_admin_fullname }}
+  first_admin_email: {{ .Values.first_admin_email }}
+  {{ if .Values.postgres.enabled }}
+  postgres_db: {{ .Values.global.postgresql.postgresqlDatabase }}
+  postgres_user: {{ .Values.global.postgresql.postgresqlUsername }}
+  postgres_port: {{ quote .Values.global.postgresql.postgresqlServicePort }}
+  postgres_host: {{ .Release.Name }}-postgresql
+  {{ end }}
