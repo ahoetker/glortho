@@ -1,0 +1,19 @@
+apiVersion: v1
+entries:
+  glortho:
+  - apiVersion: v2
+    appVersion: 0.4.0
+    created: "2021-08-02T17:29:52.962593845Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.9.0
+    description: Super-simple OAuth2 Service.
+    digest: a964b9cc9077cf97f1a393052b687505358dbbd811eea324cbcdd32016dc8203
+    name: glortho
+    type: application
+    urls:
+    - https://github.com/ahoetker/glortho/releases/download/glortho-0.4.2/glortho-0.4.2.tgz
+    version: 0.4.2
+generated: "2021-08-02T17:29:52.962744746Z"
