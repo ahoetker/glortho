@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "glortho"
-version = "0.4.0"
+version = "0.4.1"
 description = ""
 authors = ["Andrew Hoetker <andrew@hoetker.engineer>"]
 
